@@ -4,22 +4,28 @@ import personalfinance.exception.ModelException;
 
 import java.util.Objects;
 
-public class Account {
+
+
+
+public class Account extends Common {
 
     private String title;
     private Currency currency;
     private double startAmount;
     private double amount;
 
-    public Account() {
-    }
+    public Account() {}
 
-    public Account(String title, Currency currency, double startAmount) throws ModelException {
+    public Account(Currency currency) throws ModelException {
         if (title.length() == 0) throw new ModelException(ModelException.TITLE_EMPTY);
         if (currency == null) throw new ModelException(ModelException.CURRENCY_EMPTY);
-        this.title = title;
         this.currency = currency;
+    }
+    public Account(double startAmount) {
         this.startAmount = startAmount;
+    }
+    public Account(String title) {
+        this.title = title;
     }
 
     public double getAmount() {
@@ -38,38 +44,38 @@ public class Account {
         this.currency = currency;
     }
 
-    public double getStartAmount() {
-        return startAmount;
-    }
-
     public void setStartAmount(double startAmount) {
         this.startAmount = startAmount;
     }
 
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Account account = (Account) o;
+
+        return new org.apache.commons.lang.builder.EqualsBuilder()
+                .append(title, account.title)
+                .isEquals();
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.title);
-        return hash;
+        return new org.apache.commons.lang.builder.HashCodeBuilder(17, 37)
+                .append(title)
+                .toHashCode();
     }
-
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Account other = (Account) obj;
-        if (!Objects.equals(this.title, other.title)) {
-            return false;
-        }
-        return true;
+    public String getValueForComboBox() {
+        return title;
     }
-    
-
+    public void setAmountFromTransactionAndTransfer() {
+        
     }
+}

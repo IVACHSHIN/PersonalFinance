@@ -54,8 +54,13 @@ public class Article extends Common {
         }
         return true;
     }
+    @Override
     public String getValueForComboBox() {
         return title;
+    }
+
+    public double getRateByCurrency(Currency currency) {
+        return rate / currency.rate;
     }
 
 }
