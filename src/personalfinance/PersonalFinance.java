@@ -11,8 +11,8 @@ public class PersonalFinance {
 
     public static void main(String[] args) {
         init();
-        //System.out.println(Text.get("PROGRAMM_NAME"));
-        //System.out.println(Arrays.toString(Text.getMonths()));
+        System.out.println(Text.get("PROGRAMM_NAME"));
+        System.out.println(Arrays.toString(Text.getMonths()));
 
     }
 
