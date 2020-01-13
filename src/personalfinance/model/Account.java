@@ -76,6 +76,8 @@ public class Account extends Common {
         return title;
     }
     public void setAmountFromTransactionAndTransfer() {
-        
+        double setAut;
+
+        }
     }
 }
