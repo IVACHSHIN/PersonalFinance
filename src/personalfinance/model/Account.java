@@ -2,6 +2,7 @@ package personalfinance.model;
 
 import personalfinance.exception.ModelException;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -75,9 +76,21 @@ public class Account extends Common {
     public String getValueForComboBox() {
         return title;
     }
-    public void setAmountFromTransactionAndTransfer() {
-        double setAut;
+    public void setAmountFromTransactionAndTransfer(List<Transaction> transactions, List<Transfer> transfers) {
+        this.amount = startAmount;
+        for (Transaction transaction : transactions) {
+            if (transaction.getAccount().equals(this)) {
+                this.amount += transaction.getAmount();
+            }
+        }
+        for (Transfer transfer : transfers) {
+            if (transfer.getFromAccount().equals(this)) {
+                this.amount -= transfer.getFromAmount();
+            }
+            if (transfer.getToAccount().equals(this)) {
+                this.amount += transfer.getToAmount();
+            }
+        }
 
         }
     }
-}
